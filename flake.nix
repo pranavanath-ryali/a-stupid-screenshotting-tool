@@ -10,8 +10,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, rust-overlay, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+      rust-overlay,
+      ...
+    }:
+    flake-utils.lib.eachDefaultSystem (
+      system:
       let
         overlays = [ (import rust-overlay) ];
         pkgs = import nixpkgs {
@@ -20,18 +28,25 @@
 
         # 1. Configure Rust Toolchain
         rustToolchain = pkgs.rust-bin.stable.latest.default.override {
-          extensions = [ "rust-src" "rust-analyzer" "clippy" ];
+          extensions = [
+            "rust-src"
+            "rust-analyzer"
+            "clippy"
+          ];
         };
 
         # 2. Build-time tools (compilers, code generators, build scripts)
         nativeBuildInputs = with pkgs; [
           rustToolchain
           pkg-config
-          wrapGAppsHook4   # Handles GTK schema/icon assets & environment variables
+          wrapGAppsHook4 # Handles GTK schema/icon assets & environment variables
         ];
 
         # 3. Runtime shared libraries required by wayland, gtk4, and cairo bindings
         buildInputs = with pkgs; [
+          libGL
+          mesa
+          libglvnd # Provides EGL / GL dispatch headers
           gtk4
           libadwaita
           gtk4-layer-shell
@@ -41,7 +56,7 @@
           pango
           gdk-pixbuf
           glib
-          wl-clipboard      # Runtime utility for pipe/copy testing
+          wl-clipboard # Runtime utility for pipe/copy testing
         ];
 
         # 4. Cargo build options for workspace bin derivations
@@ -59,8 +74,7 @@
           shellHook = ''
             export RUST_SRC_PATH="${rustToolchain}/lib/rustlib/src/rust/library"
             export LD_LIBRARY_PATH="${pkgs.lib.makeLibraryPath buildInputs}:$LD_LIBRARY_PATH"
-            
-            echo "⚡ Iris development shell initialized."
+
             echo "   Rust toolchain: $(rustc --version)"
           '';
         };

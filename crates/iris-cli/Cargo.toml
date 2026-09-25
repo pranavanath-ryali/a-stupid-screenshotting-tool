@@ -1,0 +1,7 @@
+[package]
+name = "iris-cli"
+version.workspace = true
+edition.workspace = true
+
+[dependencies]
+iris-core.workspace = true
