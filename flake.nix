@@ -45,6 +45,7 @@
         # 3. Runtime shared libraries required by wayland, gtk4, and cairo bindings
         buildInputs = with pkgs; [
           libGL
+          libgbm
           mesa
           libglvnd # Provides EGL / GL dispatch headers
           gtk4

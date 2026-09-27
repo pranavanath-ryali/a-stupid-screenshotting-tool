@@ -13,4 +13,5 @@ iris-cli = { path = "crates/iris-cli" }
 gtk4 = "0.11.5"
 gtk4-layer-shell = "0.8.1"
 libwayshot = "0.9.0"
+image = "0.25.10"
 dirs = "7.0.0"

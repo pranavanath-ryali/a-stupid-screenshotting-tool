@@ -4,7 +4,6 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
-gtk4.workspace = true
-gtk4-layer-shell.workspace = true
+image.workspace = true
 libwayshot.workspace = true
 dirs.workspace = true
