@@ -1,8 +1,8 @@
 [package]
-name = "iris-cli"
+name = "iris-gui"
 version.workspace = true
 edition.workspace = true
 
 [dependencies]
-iris-core.workspace = true
-image.workspace = true
+gtk4.workspace = true
+gtk4-layer-shell.workspace = true

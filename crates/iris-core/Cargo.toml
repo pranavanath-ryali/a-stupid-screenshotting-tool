@@ -4,6 +4,8 @@ version.workspace = true
 edition.workspace = true
 
 [dependencies]
+serde.workspace = true
+serde_json.workspace = true
 image.workspace = true
 libwayshot.workspace = true
 dirs.workspace = true
