@@ -2,7 +2,10 @@
 name = "iris-gui"
 version.workspace = true
 edition.workspace = true
+build = "build.rs"
 
 [dependencies]
 gtk4.workspace = true
+image.workspace = true
 gtk4-layer-shell.workspace = true
+iris-core.workspace = true
