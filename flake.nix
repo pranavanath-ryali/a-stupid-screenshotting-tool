@@ -44,6 +44,8 @@
 
         # 3. Runtime shared libraries required by wayland, gtk4, and cairo bindings
         buildInputs = with pkgs; [
+          adwaita-icon-theme
+          librsvg
           libGL
           libgbm
           mesa
